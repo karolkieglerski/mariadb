@@ -1,0 +1,14 @@
+---
+  - apt:
+      name: "{{ item.name }}={{ item.version }}*"
+      state: "absent"
+      purge: yes
+    with_items: "{{ mariadb_packages }}"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  - yum:
+      name: "{{ item.name }}={{ item.version }}*"
+      state: "absent"
+      purge: yes
+    with_items: "{{ mariadb_packages }}"
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'

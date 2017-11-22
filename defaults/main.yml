@@ -1,2 +1,2 @@
 ---
-# defaults file for mariadb
+  mariadb_purge: false

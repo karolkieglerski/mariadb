@@ -1,2 +1,14 @@
 ---
-# handlers file for mariadb
+  - name: start_mariadb
+    service:
+      name: mariadb
+      enabled: true
+      state: started
+    when: mariadb_purge is not defined or not mariadb_purge
+
+  - name: restart_mariadb
+    service:
+      name: mariadb
+      enabled: true
+      state: restarted
+    when: mariadb_purge is not defined or not mariadb_purge

@@ -1,0 +1,16 @@
+---
+  - apt:
+      name: "{{ item.name }}={{ item.version }}*"
+      state: "{{ item.state }}"
+      update_cache: yes
+    with_items: "{{ mariadb_packages }}"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    notify: start_mariadb
+
+  - yum:
+      name: "{{ item.name }}={{ item.version }}*"
+      state: "{{ item.state }}"
+      update_cache: yes
+    with_items: "{{ mariadb_packages }}"
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+    notify: start_mariadb

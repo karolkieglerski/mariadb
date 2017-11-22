@@ -1,31 +1,40 @@
-Role Name
+mariadb
 =========
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/kilerkarol/mariadb.svg?branch=master)](https://travis-ci.org/kilerkarol/mariadb)
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Role install and configure mariadb.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Default variables for that role
+```
+    mariadb_purge: false
+```
 
-Dependencies
-------------
+Variable set to get default ansible variable form inventory `ansible_port` 
+```
+    ssh_port: "{{ ansible_port }}"
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Other variables for that role:
+```
+    mariadb_version: "10.0.31"
+
+    mariadb_packages:
+        - { name: "mariadb-server", version: "{{ mariadb_version }}", state: "present" }
+        - { name: "mariadb-client", version: "{{ mariadb_version }}", state: "present" }
+```    
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+  - hosts: servers
+    roles:
+      - { role: kilerkarol.mariadb, tag: mariadb }
+```
 
 License
 -------
@@ -35,4 +44,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Karol Kieglerski

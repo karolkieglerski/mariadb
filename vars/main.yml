@@ -1,2 +1,7 @@
 ---
-# vars file for mariadb
+  ssh_port: "{{ ansible_port }}"
+  mariadb_version: "10.0.31"
+
+  mariadb_packages:
+    - { name: "mariadb-server", version: "{{ mariadb_version }}", state: "present" }
+    - { name: "mariadb-client", version: "{{ mariadb_version }}", state: "present" }

@@ -1,2 +1,11 @@
 ---
-# tasks file for mariadb
+  - include_tasks: install.yml
+    when: mariadb_purge is not defined or not mariadb_purge
+
+  - include_tasks: configure.yml
+    when: mariadb_purge is not defined or not mariadb_purge
+
+  - include_tasks: purge.yml
+    when:
+      - mariadb_purge is defined
+      - mariadb_purge
